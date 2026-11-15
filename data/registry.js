@@ -29,17 +29,11 @@ window.LAW = {
 /* market: "exchange" | "otc" */
 window.PLANNED = [
   // Exchange-Traded
-  { name: "Preferred Stock", market: "exchange", asset: { pl: "Akcje", en: "Equity" } },
   { name: "Depositary Receipt (ADR / GDR)", market: "exchange", asset: { pl: "Akcje", en: "Equity" } },
-  { name: "Exchange-Traded Fund (ETF)", market: "exchange", asset: { pl: "Fundusze", en: "Funds" } },
   { name: "Exchange-Traded Note (ETN)", market: "exchange", asset: { pl: "Dłużne / strukturyzowane", en: "Debt / structured" } },
   { name: "Exchange-Traded Commodity (ETC)", market: "exchange", asset: { pl: "Towary", en: "Commodities" } },
   { name: "Real Estate Investment Trust (REIT)", market: "exchange", asset: { pl: "Akcje", en: "Equity" } },
   { name: "Closed-End Fund", market: "exchange", asset: { pl: "Fundusze", en: "Funds" } },
-  { name: "Warrant", market: "exchange", asset: { pl: "Derywaty giełdowe", en: "Listed derivatives" } },
-  { name: "Listed Equity Option", market: "exchange", asset: { pl: "Derywaty giełdowe", en: "Listed derivatives" } },
-  { name: "Government Bond Future", market: "exchange", asset: { pl: "Derywaty giełdowe", en: "Listed derivatives" } },
-  { name: "Short-Term Interest Rate Future (STIR)", market: "exchange", asset: { pl: "Derywaty giełdowe", en: "Listed derivatives" } },
   { name: "Exchange-Traded Certificate", market: "exchange", asset: { pl: "Produkty strukturyzowane", en: "Structured products" } },
   // OTC
   { name: "Government Bond", market: "otc", asset: { pl: "Dłużne", en: "Fixed income" }, note: { pl: "obrót głównie OTC, często także notowane", en: "mostly traded OTC, often also listed" } },
