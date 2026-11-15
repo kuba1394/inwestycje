@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Instrumenty finansowe — baza wiedzy</title>
-  <meta name="description" content="Baza wiedzy o instrumentach finansowych: Exchange-Traded i OTC, mechanika, przykłady i post-trade compliance (UCITS, AIFMD).">
+  <meta name="description" content="Kompendium wiedzy o instrumentach finansowych: Exchange-Traded i OTC, mechanika, przykłady, nauka od podstaw i post-trade compliance (UCITS, AIFMD).">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,12 +14,16 @@
         <span class="brand-mark" aria-hidden="true">◆</span>
         <span>
           <strong>Instrumenty finansowe</strong>
-          <small>Baza wiedzy · Post-Trade Compliance</small>
+          <small>Kompendium · Post-Trade Compliance</small>
         </span>
       </a>
-      <nav class="header-nav">
-        <a href="#/">Katalog</a>
-        <a href="#/about">O projekcie</a>
+      <nav class="header-nav" aria-label="Główna nawigacja">
+        <a href="#/" data-section="#/i/">Katalog</a>
+        <a href="#/learn" data-section="#/learn">Nauka</a>
+        <a href="#/basics" data-section="#/basics">Podstawy</a>
+        <a href="#/compliance" data-section="#/compliance">Compliance</a>
+        <a href="#/tools" data-section="#/tools">Kalkulatory</a>
+        <a href="#/about" data-section="#/about">O projekcie</a>
       </nav>
     </div>
   </header>
@@ -32,7 +36,6 @@
     </div>
   </footer>
 
-  <!-- Dane: jeden plik na instrument -->
   <script src="data/registry.js"></script>
   <script src="data/instruments/common-stock.js"></script>
   <script src="data/instruments/equity-index-future.js"></script>
@@ -71,6 +74,33 @@
   <script src="data/instruments/convertible-bond.js"></script>
   <script src="data/instruments/equity-swap.js"></script>
   <script src="data/instruments/contract-for-difference.js"></script>
+  <script src="data/basics/fund-types.js"></script>
+  <script src="data/basics/market-participants.js"></script>
+  <script src="data/basics/time-value.js"></script>
+  <script src="data/basics/yield-curve.js"></script>
+  <script src="data/basics/duration.js"></script>
+  <script src="data/basics/leverage.js"></script>
+  <script src="data/basics/derivatives.js"></script>
+  <script src="data/basics/options-greeks.js"></script>
+  <script src="data/basics/settlement.js"></script>
+  <script src="data/basics/clearing-ccp.js"></script>
+  <script src="data/basics/collateral.js"></script>
+  <script src="data/basics/counterparty-risk.js"></script>
+  <script src="data/basics/global-exposure.js"></script>
+  <script src="data/meta.js"></script>
+  <script src="data/glossary-extra.js"></script>
+  <script src="data/quiz.js"></script>
+  <script src="data/compare.js"></script>
+  <script src="data/path.js"></script>
+  <script src="data/history.js"></script>
+  <script src="data/decision.js"></script>
+  <script src="data/matrix.js"></script>
+  <script src="data/limits.js"></script>
+  <script src="data/cases.js"></script>
+  <script src="data/changes.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/learn.js"></script>
+  <script src="js/compliance.js"></script>
+  <script src="js/tools.js"></script>
 </body>
 </html>

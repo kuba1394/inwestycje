@@ -6,6 +6,7 @@
  * Nazwy instrumentów są zawsze po angielsku.
  */
 window.INSTRUMENTS = [];
+window.BASICS = [];
 
 window.LAW = {
   ucits:      { label: "Directive 2009/65/EC (UCITS Directive)", url: "https://eur-lex.europa.eu/eli/dir/2009/65/oj" },
@@ -15,6 +16,8 @@ window.LAW = {
   aifmdL2:    { label: "Commission Delegated Regulation (EU) 231/2013 (AIFMD Level 2)", url: "https://eur-lex.europa.eu/eli/reg_del/2013/231/oj" },
   emir:       { label: "Regulation (EU) 648/2012 (EMIR)", url: "https://eur-lex.europa.eu/eli/reg/2012/648/oj" },
   marginRts:  { label: "Commission Delegated Regulation (EU) 2016/2251 (margin RTS)", url: "https://eur-lex.europa.eu/eli/reg_del/2016/2251/oj" },
+  csdr:       { label: "Regulation (EU) 909/2014 (CSDR)", url: "https://eur-lex.europa.eu/eli/reg/2014/909/oj" },
+  aifmd2:     { label: "Directive (EU) 2024/927 (AIFMD II)", url: "https://eur-lex.europa.eu/eli/dir/2024/927/oj" },
   csdrT1:     { label: "Regulation (EU) 2025/2075 (CSDR — T+1)", url: "https://eur-lex.europa.eu/eli/reg/2025/2075/oj" },
   ssr:        { label: "Regulation (EU) 236/2012 (Short Selling Regulation)", url: "https://eur-lex.europa.eu/eli/reg/2012/236/oj" },
   td:         { label: "Directive 2004/109/EC (Transparency Directive)", url: "https://eur-lex.europa.eu/eli/dir/2004/109/oj" },
