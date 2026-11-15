@@ -37,6 +37,8 @@ window.INSTRUMENTS.push({
 | `identifiers` | Identyfikatory | Identifiers |
 | `checklist` | Checklista kontroli post-trade | Post-trade control checklist |
 
+Można dodać sekcję dodatkową (np. `mmf` — Fundusze rynku pieniężnego), o ile ma to samo `id` w PL i EN.
+
 ## Klasy HTML do użycia w treści
 
 - `<ol class='steps'>` — numerowane kroki mechaniki
