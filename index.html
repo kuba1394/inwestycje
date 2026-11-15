@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instrumenty finansowe — baza wiedzy</title>
+  <meta name="description" content="Baza wiedzy o instrumentach finansowych: Exchange-Traded i OTC, mechanika, przykłady i post-trade compliance (UCITS, AIFMD).">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#/">
+        <span class="brand-mark" aria-hidden="true">◆</span>
+        <span>
+          <strong>Instrumenty finansowe</strong>
+          <small>Baza wiedzy · Post-Trade Compliance</small>
+        </span>
+      </a>
+      <nav class="header-nav">
+        <a href="#/">Katalog</a>
+        <a href="#/about">O projekcie</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="app" class="wrap" tabindex="-1"></main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Materiał edukacyjny i roboczy. Nie stanowi porady prawnej ani inwestycyjnej. Przed zastosowaniem w kontroli zawsze sprawdź aktualny tekst przepisów, prospekt lub regulamin funduszu oraz wewnętrzne procedury.</p>
+    </div>
+  </footer>
+
+  <!-- Dane: jeden plik na instrument -->
+  <script src="data/registry.js"></script>
+  <script src="data/instruments/common-stock.js"></script>
+  <script src="data/instruments/equity-index-future.js"></script>
+  <script src="data/instruments/interest-rate-swap.js"></script>
+  <script src="data/instruments/fx-forward.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
