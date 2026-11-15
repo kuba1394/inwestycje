@@ -30,15 +30,6 @@ window.LAW = {
 
 /* market: "exchange" | "otc" */
 window.PLANNED = [
-  // Exchange-Traded
-  { name: "Depositary Receipt (ADR / GDR)", market: "exchange", asset: { pl: "Akcje", en: "Equity" } },
-  { name: "Exchange-Traded Note (ETN)", market: "exchange", asset: { pl: "Dłużne / strukturyzowane", en: "Debt / structured" } },
-  { name: "Exchange-Traded Commodity (ETC)", market: "exchange", asset: { pl: "Towary", en: "Commodities" } },
-  { name: "Real Estate Investment Trust (REIT)", market: "exchange", asset: { pl: "Akcje", en: "Equity" } },
-  { name: "Closed-End Fund", market: "exchange", asset: { pl: "Fundusze", en: "Funds" } },
-  { name: "Exchange-Traded Certificate", market: "exchange", asset: { pl: "Produkty strukturyzowane", en: "Structured products" } },
-  // OTC
-  { name: "Convertible Bond", market: "otc", asset: { pl: "Dłużne / hybrydowe", en: "Fixed income / hybrid" } },
-  { name: "Equity Swap", market: "otc", asset: { pl: "Derywaty akcyjne", en: "Equity derivatives" } },
-  { name: "Contract for Difference (CFD)", market: "otc", asset: { pl: "Derywaty akcyjne", en: "Equity derivatives" } }
+  // Wszystkie zaplanowane instrumenty mają już karty. Nowe pozycje dodawaj tutaj:
+  // { name: "Instrument Name", market: "exchange" | "otc", asset: { pl: "…", en: "…" } }
 ];

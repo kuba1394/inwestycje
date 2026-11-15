@@ -94,6 +94,13 @@
     renderCatalog();
   }
 
+  function plInstr(n) {
+    var d = n % 10, h = n % 100;
+    if (n === 1) return 'instrument';
+    if (d >= 2 && d <= 4 && (h < 12 || h > 14)) return 'instrumenty';
+    return 'instrumentów';
+  }
+
   function chip(value, label) {
     return '<button type="button" class="chip" data-filter="' + value + '" aria-pressed="' + (homeState.filter === value) + '">' + label + '</button>';
   }
@@ -103,13 +110,13 @@
     var html = "";
     ["exchange", "otc"].forEach(function (m) {
       if (homeState.filter !== "all" && homeState.filter !== m) return;
-      var ready = INSTRUMENTS.filter(function (x) { return x.market === m && (!q || searchText(x).indexOf(q) !== -1); });
+      var ready = INSTRUMENTS.filter(function (x) { return x.market === m && (!q || searchText(x).indexOf(q) !== -1); }).sort(function (a, b) { return a.name.localeCompare(b.name); });
       var planned = PLANNED.filter(function (x) { return x.market === m && (!q || searchText(x).indexOf(q) !== -1); });
       if (!ready.length && !planned.length) return;
       html += '<section class="market market-' + m + '">' +
         '<header class="market-head"><span class="market-tag">' + MARKETS[m].tag + '</span>' +
         '<h2>' + MARKETS[m].pl + '</h2>' +
-        '<span class="count">' + ready.length + ' gotowe · ' + planned.length + ' w przygotowaniu</span></header>';
+        '<span class="count">' + ready.length + ' ' + plInstr(ready.length) + (planned.length ? ' · ' + planned.length + ' w przygotowaniu' : '') + '</span></header>';
       if (ready.length) {
         html += '<div class="cards">' + ready.map(card).join("") + '</div>';
       }
@@ -241,7 +248,7 @@
           '<li>Przykłady liczbowe są hipotetyczne i służą zrozumieniu mechaniki.</li>' +
         '</ul>' +
         '<h2>Statystyka</h2>' +
-        '<p>Gotowe karty: <strong>' + INSTRUMENTS.length + '</strong>. W przygotowaniu: <strong>' + PLANNED.length + '</strong>.</p>' +
+        '<p>Karty instrumentów: <strong>' + INSTRUMENTS.length + '</strong> (Exchange-Traded: ' + INSTRUMENTS.filter(function (x) { return x.market === "exchange"; }).length + ', OTC: ' + INSTRUMENTS.filter(function (x) { return x.market === "otc"; }).length + ').</p>' +
         '<p><a href="#/">← Wróć do katalogu</a></p>' +
       '</article>';
   }

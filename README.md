@@ -7,6 +7,10 @@ Statyczna strona internetowa z opisami instrumentów finansowych dla zespołu **
 - Opisy po polsku i po angielsku; przełącznik PL/EN na każdej karcie (domyślnie PL)
 - Każda karta: definicja → mechanika krok po kroku → przykład liczbowy → wycena i ryzyka → cykl życia → UCITS → AIFMD → raportowanie → identyfikatory → checklista kontroli → słowniczek → podstawa prawna
 
+## Zawartość
+
+37 kart: 14 Exchange-Traded i 23 OTC (akcje, fundusze, ETP, derywaty giełdowe i OTC, instrumenty dłużne i rynku pieniężnego, transakcje finansujące papiery wartościowe).
+
 ## Uruchomienie
 
 Strona nie wymaga budowania ani serwera. Wystarczy otworzyć `index.html` w przeglądarce albo włączyć GitHub Pages:
@@ -28,7 +32,7 @@ docs/TEMPLATE.md               # jak dodać nowy instrument
 
 1. Skopiuj istniejący plik z `data/instruments/` i zmień `id`, `name`, `market`, treść `pl` i `en`.
 2. Dodaj `<script src="data/instruments/<id>.js"></script>` w `index.html`.
-3. Usuń instrument z listy `window.PLANNED` w `data/registry.js`.
+3. Jeśli instrument był na liście `window.PLANNED` w `data/registry.js`, usuń go stamtąd.
 
 Szczegóły: [docs/TEMPLATE.md](docs/TEMPLATE.md).
 
