@@ -39,12 +39,6 @@ window.PLANNED = [
   { name: "Exchange-Traded Certificate", market: "exchange", asset: { pl: "Produkty strukturyzowane", en: "Structured products" } },
   // OTC
   { name: "Convertible Bond", market: "otc", asset: { pl: "Dłużne / hybrydowe", en: "Fixed income / hybrid" } },
-  { name: "Forward Rate Agreement (FRA)", market: "otc", asset: { pl: "Derywaty stopy procentowej", en: "Interest rate derivatives" } },
-  { name: "Interest Rate Cap / Floor", market: "otc", asset: { pl: "Derywaty stopy procentowej", en: "Interest rate derivatives" } },
-  { name: "Swaption", market: "otc", asset: { pl: "Derywaty stopy procentowej", en: "Interest rate derivatives" } },
-  { name: "Non-Deliverable Forward (NDF)", market: "otc", asset: { pl: "Derywaty walutowe", en: "FX derivatives" } },
-  { name: "FX Option", market: "otc", asset: { pl: "Derywaty walutowe", en: "FX derivatives" } },
   { name: "Equity Swap", market: "otc", asset: { pl: "Derywaty akcyjne", en: "Equity derivatives" } },
-  { name: "Contract for Difference (CFD)", market: "otc", asset: { pl: "Derywaty akcyjne", en: "Equity derivatives" } },
-  { name: "Securities Lending", market: "otc", asset: { pl: "Finansowanie papierami (SFT)", en: "Securities financing (SFT)" } }
+  { name: "Contract for Difference (CFD)", market: "otc", asset: { pl: "Derywaty akcyjne", en: "Equity derivatives" } }
 ];
