@@ -1,43 +1,24 @@
 :root {
-  --paper: #f7f6f2;
-  --surface: #ffffff;
-  --ink: #1a1e27;
-  --ink-2: #4a5160;
-  --ink-3: #7a8191;
-  --line: #e3e1da;
-  --accent: #1f3a5f;
-  --exchange: #1d5fa8;
-  --exchange-soft: #e6eef8;
-  --otc: #9a5b13;
-  --otc-soft: #f6ecdf;
-  --ok: #2d6a4f;
-  --warn: #8a5a00;
-  --warn-soft: #fbf3e0;
-  --code: #eef0f4;
+  color-scheme: dark; /* strona zawsze ciemna, niezależnie od ustawień urządzenia */
+  --paper: #12151b;
+  --surface: #1a1e26;
+  --ink: #e7e9ee;
+  --ink-2: #b4bac6;
+  --ink-3: #8a91a0;
+  --line: #2b313c;
+  --accent: #8fb3e0;
+  --exchange: #7fb0ea;
+  --exchange-soft: #1b2a3d;
+  --otc: #e0a866;
+  --otc-soft: #33281a;
+  --ok: #7cc4a0;
+  --warn: #e6c26a;
+  --warn-soft: #2e2817;
+  --code: #232833;
   --radius: 10px;
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #12151b;
-    --surface: #1a1e26;
-    --ink: #e7e9ee;
-    --ink-2: #b4bac6;
-    --ink-3: #8a91a0;
-    --line: #2b313c;
-    --accent: #8fb3e0;
-    --exchange: #7fb0ea;
-    --exchange-soft: #1b2a3d;
-    --otc: #e0a866;
-    --otc-soft: #33281a;
-    --ok: #7cc4a0;
-    --warn: #e6c26a;
-    --warn-soft: #2e2817;
-    --code: #232833;
-  }
 }
 
 * { box-sizing: border-box; }
@@ -202,6 +183,28 @@ table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
 }
 
 @media print {
+  :root {
+      color-scheme: light;
+    --paper: #f7f6f2;
+    --surface: #ffffff;
+    --ink: #1a1e27;
+    --ink-2: #4a5160;
+    --ink-3: #7a8191;
+    --line: #e3e1da;
+    --accent: #1f3a5f;
+    --exchange: #1d5fa8;
+    --exchange-soft: #e6eef8;
+    --otc: #9a5b13;
+    --otc-soft: #f6ecdf;
+    --ok: #2d6a4f;
+    --warn: #8a5a00;
+    --warn-soft: #fbf3e0;
+    --code: #eef0f4;
+    --radius: 10px;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
   .site-header, .toc, .lang-toggle, .site-footer { display: none; }
   .inst-layout { display: block; }
   body { background: #fff; }
@@ -226,7 +229,7 @@ table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
 
 .badge.level { background: transparent; border: 1px solid var(--line); color: var(--ink-2); }
 .badge-basic { background: #e9f2ec; color: var(--ok); }
-@media (prefers-color-scheme: dark) { .badge-basic { background: #1d2e25; } }
+.badge-basic { background: #1d2e25; }
 .reviewed { margin: 4px 0 0; font-size: 12.5px; color: var(--ink-3); }
 .tldr { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 18px; margin: 0 0 18px; }
 .tldr p { margin: 4px 0 0; }
@@ -241,7 +244,7 @@ table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
 .btn-read, .btn-sec { background: var(--surface); color: var(--accent); }
 .btn-read.done { border-color: var(--ok); color: var(--ok); }
 .btn:disabled { opacity: .5; cursor: default; }
-@media (prefers-color-scheme: dark) { .btn { color: #0f1520; } }
+.btn { color: #0f1520; }
 
 /* Podpowiedzi słownikowe */
 .term { border-bottom: 1px dotted var(--accent); cursor: help; position: relative; }
@@ -306,8 +309,8 @@ table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
 .quiz-opt { text-align: left; font: inherit; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
 .quiz-opt:hover:not(:disabled) { border-color: var(--accent); }
 .quiz-opt.correct { border-color: var(--ok); background: #e7f3ec; }
-.quiz-opt.wrong { border-color: #b3261e; background: #fbe9e7; }
-@media (prefers-color-scheme: dark) { .quiz-opt.correct { background: #1d2e25; } .quiz-opt.wrong { background: #3a1f1d; } }
+.quiz-opt.wrong { border-color: #f2867c; background: #fbe9e7; }
+.quiz-opt.correct { background: #1d2e25; } .quiz-opt.wrong { background: #3a1f1d; }
 .quiz-exp { margin: 14px 0; padding: 12px 16px; border-radius: 10px; background: var(--code); }
 .quiz-meta { display: flex; justify-content: space-between; color: var(--ink-3); font-size: 13.5px; }
 .score-big { font-family: var(--serif); font-size: 46px; font-weight: 600; margin: 10px 0; }
@@ -351,7 +354,7 @@ table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
 .calc-out strong { font-family: var(--mono); }
 .pf-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .pf-table th, .pf-table td { padding: 6px; border-bottom: 1px solid var(--line); text-align: left; }
-.flag-bad { color: #b3261e; font-weight: 700; }
+.flag-bad { color: #f2867c; font-weight: 700; }
 .flag-warn { color: var(--warn); font-weight: 700; }
 .flag-ok { color: var(--ok); font-weight: 700; }
 
@@ -368,7 +371,7 @@ table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
 .tl-date { font-family: var(--mono); font-size: 13px; color: var(--ink-3); }
 .tl-title { font-weight: 700; display: block; margin: 2px 0; }
 .status { font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 6px; text-transform: uppercase; letter-spacing: .4px; }
-.status.obowiazuje { background: #e7f3ec; color: var(--ok); }
+.status.obowiazuje { background: #1d2e25; color: var(--ok); }
 .status.wkrotce { background: var(--warn-soft); color: var(--warn); }
 .status.wygasle { background: var(--code); color: var(--ink-3); }
 .lesson { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; margin: 26px 0; }
