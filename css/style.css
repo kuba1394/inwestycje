@@ -405,3 +405,7 @@ table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
 .gl-entry dd em { font-style: normal; font-weight: 700; color: var(--ink-3); font-size: 12px; }
 .flashcard-inner { display: block; } .flashcard .fc-term, .flashcard .fc-def, .flashcard .fc-hint { display: block; }
 .calc-box { overflow-x: auto; } .pf-table select { min-width: 0; max-width: 100%; }
+.codes { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 4px; }
+.codes code { font-size: 12px; padding: 2px 6px; border-radius: 5px; background: var(--code); border: 1px solid var(--line); }
+.tech-codes { margin: 0 0 18px; }
+.card-codes { display: block; font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-top: 6px; }

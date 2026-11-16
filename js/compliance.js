@@ -27,6 +27,7 @@
       ["#/compliance/limits", "Tabela limitów", "UCITS art. 50–56 i 83–89, ekspozycja z derywatów, AIFMD z AIFMD II, MMFR."],
       ["#/compliance/cases", "Studia przypadków", CASES.length + " sytuacji z obliczeniami: przekroczenia, kontrahenci, znaczne pakiety, zabezpieczenia."],
       ["#/compliance/changes", "Zmiany w przepisach", "Oś czasu: EMIR 3, AIFMD II, T+1, reforma WIBOR." + (upcoming ? " Najbliższa: " + upcoming.date + "." : "")],
+      ["#/compliance/security-types", "Security types w aplikacji", (window.SECTYPES || []).length + " kodów typów papierów z aplikacji: która karta opisuje każdy kod i dlaczego pozycje techniczne nie mają kart."],
       ["#/tools", "Kalkulatory", "Test 5/10/40, ekspozycja w metodzie zaangażowania, FX forward, duration, bon skarbowy, opcje."]
     ];
     app.innerHTML = '<article class="page"><h1>Compliance</h1>' +
@@ -155,6 +156,38 @@
       }).join("") + '</ol></article>';
   }
 
+  /* ---------- Security types ---------- */
+
+  var stf = { q: "", kind: "all" };
+  var KINDS = { card: "Karta", variant: "Wariant w karcie", none: "Bez karty" };
+  function renderSecTypes() {
+    KB.title("Security types w aplikacji");
+    var all = window.SECTYPES || [];
+    var cnt = { card: 0, variant: 0, none: 0 };
+    all.forEach(function (c) { cnt[c.kind]++; });
+    app.innerHTML = '<article class="page wide">' + crumbs("Security types") + '<h1>Security types w aplikacji</h1>' +
+      '<p class="intro">Wszystkie ' + all.length + ' kody typów papierów z aplikacji do post-trade compliance. ' + cnt.card + ' kodów ma własną kartę, ' + cnt.variant + ' to warianty opisane w istniejącej karcie, a ' + cnt.none + ' to pozycje techniczne bez karty — z wyjaśnieniem dlaczego. Kody można też wpisać w wyszukiwarkę katalogu.</p>' +
+      '<div class="filters"><input type="search" id="stq" placeholder="Kod lub nazwa, np. SWAPIRS, TIPS…" value="' + esc(stf.q) + '">' +
+        '<select id="stk"><option value="all">Wszystkie (' + all.length + ')</option>' + Object.keys(KINDS).map(function (k) { return '<option value="' + k + '">' + KINDS[k] + ' (' + cnt[k] + ')</option>'; }).join("") + '</select></div>' +
+      '<div class="matrix-wrap"><table class="data-table"><thead><tr><th>Security type</th><th>Name</th><th>Status</th><th>Karta / wyjaśnienie</th></tr></thead><tbody id="stb"></tbody></table></div></article>';
+    document.getElementById("stk").value = stf.kind;
+    document.getElementById("stq").addEventListener("input", function () { stf.q = this.value; rows(); });
+    document.getElementById("stk").addEventListener("change", function () { stf.kind = this.value; rows(); });
+    rows();
+    function rows() {
+      var q = KB.norm(stf.q.trim());
+      document.getElementById("stb").innerHTML = all.filter(function (c) {
+        if (stf.kind !== "all" && c.kind !== stf.kind) return false;
+        return !q || KB.norm(c.code + " " + c.name + " " + (c.note || "")).indexOf(q) !== -1;
+      }).map(function (c) {
+        var right = c.kind === "none" ? '<strong>' + esc(c.group) + '.</strong> ' + esc(c.note) :
+          KB.link(c.card) + (c.note ? '<span class="cell-note">' + esc(c.note) + '</span>' : '');
+        return '<tr><th scope="row"><code>' + esc(c.code) + '</code></th><td>' + esc(c.name) + '</td><td><span class="' + (c.kind === "none" ? "no" : "yes") + '">' + KINDS[c.kind] + '</span></td><td>' + right + '</td></tr>';
+      }).join("") || '<tr><td colspan="4" class="empty">Brak kodów.</td></tr>';
+    }
+  }
+
+  KB.route(/^#\/compliance\/security-types/, renderSecTypes);
   KB.route(/^#\/compliance\/?$/, renderHub);
   KB.route(/^#\/compliance\/decision/, renderDecision);
   KB.route(/^#\/compliance\/matrix/, renderMatrix);

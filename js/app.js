@@ -29,14 +29,14 @@
       sources: "Podstawa prawna i źródła", back: "Katalog", langLabel: "Język opisu",
       tldr: "W 30 sekund", before: "Zanim przeczytasz", level: "Poziom", reviewed: "Zweryfikowano",
       markRead: "Oznacz jako przeczytane", isRead: "Przeczytane ✓", quiz: "Sprawdź się — quiz",
-      basics: "Podstawy", related: "Powiązane instrumenty"
+      basics: "Podstawy", related: "Powiązane instrumenty", codes: "Security types w aplikacji", variant: "(wariant)"
     },
     en: {
       keyFacts: "Key facts", contents: "Contents", glossary: "Glossary",
       sources: "Legal basis and sources", back: "Catalogue", langLabel: "Description language",
       tldr: "In 30 seconds", before: "Before you read", level: "Level", reviewed: "Reviewed",
       markRead: "Mark as read", isRead: "Read ✓", quiz: "Test yourself — quiz",
-      basics: "Basics", related: "Related instruments"
+      basics: "Basics", related: "Related instruments", codes: "Security types in the application", variant: "(variant)"
     }
   };
   KB.UI = UI;
@@ -74,6 +74,9 @@
   };
   KB.links = function (ids) { return (ids || []).map(function (i) { return KB.link(i); }).join(", "); };
   KB.meta = function (id) { return META[id] || {}; };
+  /* Kody security type z aplikacji przypisane do karty (kind "card" i "variant") */
+  KB.SECTYPES = window.SECTYPES || [];
+  KB.codes = function (id) { return KB.SECTYPES.filter(function (c) { return c.card === id; }); };
   KB.REVIEWED = window.REVIEWED || "";
 
   /* Bezpieczna pamięć przeglądarki (może być niedostępna) */
@@ -221,6 +224,7 @@
     var parts = [item.name, item.asset && item.asset.pl, item.asset && item.asset.en, KB.MARKETS[item.market].tag];
     if (item.aliases) parts = parts.concat(item.aliases);
     if (item.content) parts.push(item.content.pl.summary, item.content.en.summary);
+    if (item.id) KB.codes(item.id).forEach(function (c) { parts.push(c.code, c.name); });
     return KB.norm(parts.join(" "));
   }
 
@@ -249,7 +253,7 @@
       '</section>' +
       '<div class="controls">' +
         '<label class="search"><span class="sr-only">Szukaj</span>' +
-          '<input id="q" type="search" placeholder="Szukaj instrumentu, np. swap, future, akcje…" autocomplete="off" value="' + esc(homeState.query) + '">' +
+          '<input id="q" type="search" placeholder="Szukaj instrumentu lub kodu security type, np. swap, SWAPIRS, akcje…" autocomplete="off" value="' + esc(homeState.query) + '">' +
         '</label>' +
         '<div class="chips" role="group" aria-label="Filtr rynku">' +
           chip("all", "Wszystkie") + chip("exchange", "Exchange-Traded") + chip("otc", "OTC") +
@@ -296,6 +300,13 @@
       }
       html += '</section>';
     });
+    // Kody techniczne (bez karty) — pokaż wyjaśnienie zamiast pustego wyniku
+    if (q) {
+      var tech = KB.SECTYPES.filter(function (c) { return c.kind === "none" && (KB.norm(c.code) === q || KB.norm(c.name).indexOf(q) !== -1); });
+      if (tech.length) html = '<section class="tech-codes">' + tech.map(function (c) {
+        return '<div class="tldr"><span class="tldr-k">' + esc(c.code) + ' · ' + esc(c.group) + '</span><p><strong>' + esc(c.name) + '</strong> — ' + esc(c.note) + '</p></div>';
+      }).join("") + '<p class="cell-note">Pełna lista kodów: <a href="#/compliance/security-types">Security types w aplikacji</a>.</p></section>' + html;
+    }
     if (!html) html = '<p class="empty">Brak wyników dla „' + esc(homeState.query) + '”.</p>';
     document.getElementById("catalog").innerHTML = html;
   }
@@ -306,6 +317,12 @@
       '<span class="card-top"><span class="card-asset">' + esc(x.asset.pl) + '</span>' + (meta.level ? '<span class="dots" title="Poziom: ' + KB.LEVELS[meta.level].pl + '">' + "●●●".slice(0, meta.level) + "○○○".slice(meta.level) + '</span>' : '') + '</span>' +
       '<h3>' + esc(x.name) + (isRead ? ' <span class="read-mark" title="Przeczytane">✓</span>' : '') + '</h3>' +
       '<p>' + esc(meta.tldr ? meta.tldr.pl : x.content.pl.summary) + '</p>' +
+      (function () {
+        var q = KB.norm(homeState.query.trim());
+        if (!q) return "";
+        var hit = KB.codes(x.id).filter(function (c) { return KB.norm(c.code + " " + c.name).indexOf(q) !== -1; });
+        return hit.length ? '<span class="card-codes">' + hit.map(function (c) { return esc(c.code); }).join(" · ") + '</span>' : "";
+      })() +
       '<span class="card-more">Otwórz kartę →</span>' +
     '</a>';
   }
@@ -324,6 +341,7 @@
     var toc = c.sections.map(function (s) {
       return '<li><a href="#s-' + s.id + '" data-scroll="s-' + s.id + '">' + esc(s.title) + '</a></li>';
     }).join("");
+    if (opts.codes && opts.codes.length) toc += '<li><a href="#s-codes" data-scroll="s-codes">' + t.codes + '</a></li>';
     if (c.glossary && c.glossary.length) toc += '<li><a href="#s-glossary" data-scroll="s-glossary">' + t.glossary + '</a></li>';
     if (opts.sources && opts.sources.length) toc += '<li><a href="#s-sources" data-scroll="s-sources">' + t.sources + '</a></li>';
 
@@ -354,6 +372,10 @@
         return '<li>' + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label) + '</a>' : esc(s.label)) + '</li>';
       }).join("") + '</ul></section>' : "";
 
+    var codes = opts.codes || [];
+    var codesBlock = codes.length ? '<section class="block noterms" id="s-codes"><h2>' + t.codes + '</h2><div class="table-scroll"><table class="calc"><thead><tr><th>Security type</th><th>Name</th>' + (lang === "pl" ? '<th>Uwagi</th>' : '') + '</tr></thead><tbody>' +
+      codes.map(function (c) { return '<tr><td><code>' + esc(c.code) + '</code></td><td>' + esc(c.name) + (c.kind === "variant" ? ' <span class="cell-note">' + t.variant + '</span>' : '') + '</td>' + (lang === "pl" ? '<td>' + esc(c.note || "") + '</td>' : '') + '</tr>'; }).join("") +
+      '</tbody></table></div></section>' : "";
     var isRead = KB.isRead(readKey);
     var actions = '<div class="doc-actions">' +
       '<button type="button" class="btn-read' + (isRead ? ' done' : '') + '" data-read>' + (isRead ? t.isRead : t.markRead) + '</button>' +
@@ -367,6 +389,7 @@
           '<div class="badges">' + opts.badgesHtml(lang) + KB.levelBadge(opts.level, lang) + '</div>' +
           '<h1>' + esc(opts.title[lang] || opts.title) + '</h1>' +
           (opts.aliases && opts.aliases.length ? '<p class="aka">' + opts.aliases.map(esc).join(" · ") + '</p>' : '') +
+          ((opts.codes || []).length ? '<p class="codes">' + opts.codes.map(function (c) { return '<code title="' + esc(c.name) + '">' + esc(c.code) + '</code>'; }).join(" ") + '</p>' : '') +
           (KB.REVIEWED ? '<p class="reviewed">' + t.reviewed + ': ' + esc(opts.reviewed || KB.REVIEWED) + '</p>' : '') +
         '</div>' +
         '<div class="lang-toggle" role="group" aria-label="' + t.langLabel + '">' +
@@ -378,7 +401,7 @@
       '<div class="inst-layout">' +
         '<aside class="toc"><h2>' + t.contents + '</h2><ol>' + toc + '</ol></aside>' +
         '<article class="inst-body" lang="' + lang + '">' +
-          '<p class="lead">' + esc(c.summary) + '</p>' + top + facts + sections + glossary + related + sources + actions +
+          '<p class="lead">' + esc(c.summary) + '</p>' + top + facts + sections + codesBlock + glossary + related + sources + actions +
         '</article>' +
       '</div>';
 
@@ -423,7 +446,7 @@
     KB.renderDoc({
       kind: "instrument", id: id, title: { pl: x.name, en: x.name }, aliases: x.aliases,
       content: x.content, sources: x.sources, level: meta.level, tldr: meta.tldr, prereq: meta.prereq,
-      related: meta.related, quizId: hasQuiz ? id : null, headClass: "market-" + x.market,
+      related: meta.related, quizId: hasQuiz ? id : null, headClass: "market-" + x.market, codes: KB.codes(id),
       crumbsHtml: function (lang) {
         return '<a href="#/">' + UI[lang].back + '</a><span>/</span><span>' + mk.tag + '</span><span>/</span><span>' + esc(x.name) + '</span>';
       },
