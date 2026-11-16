@@ -246,6 +246,7 @@
         '<p>Każda karta wyjaśnia mechanikę instrumentu krok po kroku, pokazuje przykład na liczbach i zbiera to, co ważne w <strong>post-trade compliance</strong> funduszy: dopuszczalność, limity, ekspozycję i raportowanie według <strong>UCITS</strong> i <strong>AIFMD</strong>.</p>' +
       '</section>' +
       '<section class="start-band">' +
+        '<a class="start-tile" href="#/overview"><span class="st-k">Na start</span><strong>Przegląd instrumentów</strong><span>Wszystkie instrumenty z krótkimi opisami, w rodzinach.</span></a>' +
         '<a class="start-tile" href="#/learn/path"><span class="st-k">Zacznij tutaj</span><strong>Ścieżka nauki</strong><span>Od podstaw do derywatów OTC — w 6 etapach.</span></a>' +
         '<a class="start-tile" href="#/basics"><span class="st-k">Fundamenty</span><strong>Podstawy pojęć</strong><span>Duration, dźwignia, CCP, rozrachunek, ekspozycja.</span></a>' +
         '<a class="start-tile" href="#/compliance/decision"><span class="st-k">W pracy</span><strong>Nowy instrument w portfelu?</strong><span>Drzewo decyzyjne: jakie limity i obowiązki.</span></a>' +

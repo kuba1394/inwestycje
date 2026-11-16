@@ -425,3 +425,25 @@ table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
 .code-hits .ch-name { flex: 1 1 220px; }
 .code-hits .ch-kind { font-size: 11px; text-transform: uppercase; color: var(--ink-3); letter-spacing: .4px; }
 .code-hits .ch-note { flex-basis: 100%; margin: 0; font-size: 13px; color: var(--ink-2); }
+/* Przegląd instrumentów */
+.ov-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.ov-jump { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 8px; }
+.ov-jump a { font-size: 13px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); text-decoration: none; color: var(--ink-2); }
+.ov-jump a span { color: var(--ink-3); margin-left: 2px; }
+.ov-jump a:hover { border-color: var(--accent); color: var(--ink); }
+.ov-group { margin: 34px 0 0; }
+.ov-group header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.ov-group h2 { margin: 0; font-family: var(--serif); font-size: 24px; }
+.ov-gdesc { color: var(--ink-2); margin: 10px 0 14px; max-width: 860px; }
+.ov-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+.ov-item { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); }
+.ov-item.market-exchange { border-left-color: var(--exchange); }
+.ov-item.market-otc { border-left-color: var(--otc); }
+.ov-item:hover { border-color: var(--accent); }
+.ov-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.ov-item h3 { margin: 0; font-size: 16.5px; font-family: var(--serif); }
+.ov-tags { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+.ov-tags .badge { font-size: 10.5px; padding: 1px 6px; }
+.ov-item p { margin: 0; font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+.ov-codes { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+@media (max-width: 700px) { .ov-items { grid-template-columns: 1fr; } }
