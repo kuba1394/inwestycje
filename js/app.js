@@ -218,7 +218,7 @@
 
   /* ---------- Strona główna / katalog ---------- */
 
-  var homeState = { filter: "all", query: "" };
+  var homeState = { filter: "all", query: "", code: "" };
 
   function searchText(item) {
     var parts = [item.name, item.asset && item.asset.pl, item.asset && item.asset.en, KB.MARKETS[item.market].tag];
@@ -251,6 +251,13 @@
         '<a class="start-tile" href="#/compliance/decision"><span class="st-k">W pracy</span><strong>Nowy instrument w portfelu?</strong><span>Drzewo decyzyjne: jakie limity i obowiązki.</span></a>' +
         '<a class="start-tile" href="#/learn/quiz"><span class="st-k">Utrwal</span><strong>Quizy i fiszki</strong><span>Sprawdź, ile już wiesz.' + (readCount ? ' Przeczytane karty: ' + readCount + '/' + INSTRUMENTS.length + '.' : '') + '</span></a>' +
       '</section>' +
+      '<section class="code-search">' +
+        '<label class="search code-input"><span class="code-label">Security type code</span>' +
+          '<input id="codeq" type="search" list="codelist" placeholder="Wpisz kod z aplikacji, np. SWAPIRS, TIPS, RCVBL1…" autocomplete="off" spellcheck="false" value="' + esc(homeState.code) + '">' +
+        '</label>' +
+        '<datalist id="codelist">' + KB.SECTYPES.map(function (c) { return '<option value="' + esc(c.code) + '">' + esc(c.name) + '</option>'; }).join("") + '</datalist>' +
+        '<div id="code-results"></div>' +
+      '</section>' +
       '<div class="controls">' +
         '<label class="search"><span class="sr-only">Szukaj</span>' +
           '<input id="q" type="search" placeholder="Szukaj instrumentu lub kodu security type, np. swap, SWAPIRS, akcje…" autocomplete="off" value="' + esc(homeState.query) + '">' +
@@ -261,6 +268,14 @@
       '</div>' +
       '<div id="catalog"></div>';
 
+    var cq = document.getElementById("codeq");
+    cq.addEventListener("input", function () { homeState.code = cq.value; renderCodeResults(); });
+    cq.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter") return;
+      var hit = KB.SECTYPES.filter(function (c) { return c.code.toUpperCase() === cq.value.trim().toUpperCase(); })[0];
+      if (hit && hit.card) location.hash = "#/i/" + hit.card;
+    });
+    renderCodeResults();
     var q = document.getElementById("q");
     q.addEventListener("input", function () { homeState.query = q.value; renderCatalog(); });
     KB.each(".chip", function (b) {
@@ -271,6 +286,24 @@
       });
     });
     renderCatalog();
+  }
+
+  /* Wyszukiwarka po samym kodzie security type: najpierw dokładne trafienie, potem kody zaczynające się od wpisanego tekstu, potem zawierające go */
+  function renderCodeResults() {
+    var box = document.getElementById("code-results");
+    var q = homeState.code.trim().toUpperCase();
+    if (!q) { box.innerHTML = ""; return; }
+    var rank = function (c) { var k = c.code.toUpperCase(); return k === q ? 0 : k.indexOf(q) === 0 ? 1 : k.indexOf(q) !== -1 ? 2 : 9; };
+    var hits = KB.SECTYPES.filter(function (c) { return rank(c) < 9; })
+      .sort(function (a, b) { return rank(a) - rank(b) || a.code.localeCompare(b.code); });
+    var KIND = { card: "Karta", variant: "Wariant w karcie", none: "Bez karty" };
+    box.innerHTML = hits.length ? '<ul class="code-hits">' + hits.slice(0, 15).map(function (c) {
+      var x = c.card && KB.instrument(c.card);
+      var right = x ? '<a href="#/i/' + c.card + '">' + esc(x.name) + ' →</a>' : '<span class="cell-note">' + esc(c.group) + '</span>';
+      return '<li class="' + (c.kind === "none" ? "tech" : "") + '"><code>' + esc(c.code) + '</code><span class="ch-name">' + esc(c.name) + '</span><span class="ch-kind">' + KIND[c.kind] + '</span>' + right +
+        (c.kind === "none" || c.note ? '<p class="ch-note">' + esc(c.note || "") + '</p>' : '') + '</li>';
+    }).join("") + '</ul>' + (hits.length > 15 ? '<p class="cell-note">Pokazano 15 z ' + hits.length + ' kodów — doprecyzuj kod. Pełna lista: <a href="#/compliance/security-types">Security types w aplikacji</a>.</p>' : '')
+      : '<p class="empty">Brak kodu „' + esc(homeState.code) + '” na liście 209 security types. <a href="#/compliance/security-types">Pełna lista</a>.</p>';
   }
 
   function chip(value, label) {

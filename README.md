@@ -9,7 +9,7 @@ Statyczna strona internetowa z opisami instrumentów finansowych dla zespołu **
 
 ## Zawartość
 
-- **Katalog** — 68 kart: 19 Exchange-Traded i 49 OTC. Każda karta pokazuje kody security type z aplikacji post-trade compliance, a wyszukiwarka znajduje instrument także po kodzie (np. `SWAPIRS`, `TIPS`). Każda ma poziom trudności, sekcję „W 30 sekund”, wymagane podstawy, powiązane instrumenty i datę weryfikacji.
+- **Katalog** — 68 kart: 19 Exchange-Traded i 49 OTC. Każda karta pokazuje kody security type z aplikacji post-trade compliance, a na stronie głównej jest osobna wyszukiwarka po samym kodzie security type (podpowiedzi, Enter otwiera kartę). Każda ma poziom trudności, sekcję „W 30 sekund”, wymagane podstawy, powiązane instrumenty i datę weryfikacji.
 - **Nauka** — ścieżka nauki w 6 etapach z postępem, 13 stron podstaw (PL/EN), słownik PL↔EN z podpowiedziami na kartach, fiszki, 41 quizów (108 pytań) i test losowy, tabele porównawcze, lekcje z historii (Herstatt, LTCM, Reserve Primary, AIG, LIBOR, marzec 2020, Archegos, LDI).
 - **Compliance** — drzewo decyzyjne „nowy instrument w portfelu”, matryca obowiązków (limity, ekspozycja, EMIR, clearing, SFTR, SSR, znaczne pakiety), tabela limitów UCITS/AIFMD/MMFR, studia przypadków, oś czasu zmian w przepisach.
 - **Security types** (`#/compliance/security-types`) — 209 kodów z aplikacji: która karta opisuje kod, a dla 35 pozycji technicznych — dlaczego nie mają karty. Dane: `data/sectypes.js`.
