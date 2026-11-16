@@ -29,14 +29,14 @@
       sources: "Podstawa prawna i źródła", back: "Katalog", langLabel: "Język opisu",
       tldr: "W 30 sekund", before: "Zanim przeczytasz", level: "Poziom", reviewed: "Zweryfikowano",
       markRead: "Oznacz jako przeczytane", isRead: "Przeczytane ✓", quiz: "Sprawdź się — quiz",
-      basics: "Podstawy", related: "Powiązane instrumenty", codes: "Security types w aplikacji", variant: "(wariant)"
+      basics: "Podstawy", related: "Powiązane instrumenty", codes: "Security types w aplikacji", variant: "(wariant)", notes: "Uwagi"
     },
     en: {
       keyFacts: "Key facts", contents: "Contents", glossary: "Glossary",
       sources: "Legal basis and sources", back: "Catalogue", langLabel: "Description language",
       tldr: "In 30 seconds", before: "Before you read", level: "Level", reviewed: "Reviewed",
       markRead: "Mark as read", isRead: "Read ✓", quiz: "Test yourself — quiz",
-      basics: "Basics", related: "Related instruments", codes: "Security types in the application", variant: "(variant)"
+      basics: "Basics", related: "Related instruments", codes: "Security types in the application", variant: "(variant)", notes: "Notes"
     }
   };
   KB.UI = UI;
@@ -373,8 +373,8 @@
       }).join("") + '</ul></section>' : "";
 
     var codes = opts.codes || [];
-    var codesBlock = codes.length ? '<section class="block noterms" id="s-codes"><h2>' + t.codes + '</h2><div class="table-scroll"><table class="calc"><thead><tr><th>Security type</th><th>Name</th>' + (lang === "pl" ? '<th>Uwagi</th>' : '') + '</tr></thead><tbody>' +
-      codes.map(function (c) { return '<tr><td><code>' + esc(c.code) + '</code></td><td>' + esc(c.name) + (c.kind === "variant" ? ' <span class="cell-note">' + t.variant + '</span>' : '') + '</td>' + (lang === "pl" ? '<td>' + esc(c.note || "") + '</td>' : '') + '</tr>'; }).join("") +
+    var codesBlock = codes.length ? '<section class="block noterms" id="s-codes"><h2>' + t.codes + '</h2><div class="table-scroll"><table class="calc"><thead><tr><th>Security type</th><th>Name</th><th>' + t.notes + '</th></tr></thead><tbody>' +
+      codes.map(function (c) { return '<tr><td><code>' + esc(c.code) + '</code></td><td>' + esc(c.name) + (c.kind === "variant" ? ' <span class="cell-note">' + t.variant + '</span>' : '') + '</td><td>' + esc((lang === "en" ? c.noteEn : c.note) || "") + '</td></tr>'; }).join("") +
       '</tbody></table></div></section>' : "";
     var isRead = KB.isRead(readKey);
     var actions = '<div class="doc-actions">' +
