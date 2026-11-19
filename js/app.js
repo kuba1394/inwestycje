@@ -250,6 +250,7 @@
         '<a class="start-tile" href="#/learn/path"><span class="st-k">Zacznij tutaj</span><strong>Ścieżka nauki</strong><span>Od podstaw do derywatów OTC — w 6 etapach.</span></a>' +
         '<a class="start-tile" href="#/basics"><span class="st-k">Fundamenty</span><strong>Podstawy pojęć</strong><span>Duration, dźwignia, CCP, rozrachunek, ekspozycja.</span></a>' +
         '<a class="start-tile" href="#/compliance/decision"><span class="st-k">W pracy</span><strong>Nowy instrument w portfelu?</strong><span>Drzewo decyzyjne: jakie limity i obowiązki.</span></a>' +
+        '<a class="start-tile" href="#/game"><span class="st-k">Motywacja</span><strong>Gra: Instrumentarium</strong><span>XP, poziomy, seria dni, sprint 60 s i mapa opanowania.</span></a>' +
         '<a class="start-tile" href="#/learn/quiz"><span class="st-k">Utrwal</span><strong>Quizy i fiszki</strong><span>Sprawdź, ile już wiesz.' + (readCount ? ' Przeczytane karty: ' + readCount + '/' + INSTRUMENTS.length + '.' : '') + '</span></a>' +
       '</section>' +
       '<section class="code-search">' +
