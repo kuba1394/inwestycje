@@ -523,6 +523,7 @@
           '<li><a href="#/learn">Nauka</a> — ścieżka nauki, podstawy pojęć, słownik, quizy i fiszki, porównania, lekcje z historii.</li>' +
           '<li><a href="#/compliance">Compliance</a> — drzewo decyzyjne, matryca obowiązków, tabela limitów, studia przypadków, zmiany w przepisach.</li>' +
           '<li><a href="#/tools">Kalkulatory</a> — interaktywne obliczenia do przykładów z kart.</li>' +
+          '<li><strong>Offline</strong> — na telefonie otwórz stronę raz z internetem i dodaj ją do ekranu głównego; potem działa bez sieci. Alternatywa: <a href="offline.html" download>offline.html</a> — cała strona w jednym pliku.</li>' +
         '</ul>' +
         '<h2>Zasady</h2>' +
         '<ul>' +

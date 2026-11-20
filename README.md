@@ -25,6 +25,12 @@ Strona nie wymaga budowania ani serwera. Wystarczy otworzyć `index.html` w prze
 
 **Settings → Pages → Build and deployment → Source: Deploy from a branch → `main` / `(root)`**
 
+## Wersja offline
+
+- **PWA**: `manifest.webmanifest` + `sw.js` — po pierwszym otwarciu strony (np. na telefonie) wszystkie pliki trafiają do pamięci podręcznej i strona działa bez internetu; można ją dodać do ekranu głównego.
+- **offline.html**: cała strona w jednym pliku (CSS i JS wbudowane).
+- Po każdej zmianie treści uruchom `python3 tools/build_offline.py`, żeby odświeżyć `sw.js` i `offline.html`.
+
 ## Struktura
 
 ```
